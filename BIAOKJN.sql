@@ -1,9 +1,9 @@
-SELECT A.TABLESPACE_NAME "±Ìø’º‰√˚",
+SELECT A.TABLESPACE_NAME "Ë°®Á©∫Èó¥Âêç",
        A.FILE_NAME,
-       A.BYTES / 1024 / 1024 "±Ìø’º‰¥Û–°(M)",
-       (A.BYTES - B.BYTES) / 1024 / 1024 "“— π”√ø’º‰(M)",
-       B.BYTES / 1024 / 1024 "ø’œ–ø’º‰(M)",
-       ROUND(((A.BYTES - B.BYTES) / A.BYTES) * 100, 2) " π”√±»"
+       A.BYTES / 1024 / 1024 "Ë°®Á©∫Èó¥Â§ßÂ∞è(M)", 
+       (A.BYTES - B.BYTES) / 1024 / 1024 "Â∑≤‰ΩøÁî®Á©∫Èó¥(M)",
+       B.BYTES / 1024 / 1024 "Á©∫Èó≤Á©∫Èó¥(M)",
+       ROUND(((A.BYTES - B.BYTES) / A.BYTES) * 100, 2) "‰ΩøÁî®ÊØî"
   FROM (SELECT TABLESPACE_NAME, SUM(BYTES) BYTES, FILE_NAME FROM DBA_DATA_FILES GROUP BY TABLESPACE_NAME, FILE_NAME) A,
        (SELECT TABLESPACE_NAME, SUM(BYTES) BYTES, MAX(BYTES) LARGEST FROM DBA_FREE_SPACE GROUP BY TABLESPACE_NAME) B
  WHERE A.TABLESPACE_NAME = B.TABLESPACE_NAME
